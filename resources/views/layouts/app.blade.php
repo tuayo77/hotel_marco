@@ -39,7 +39,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'marco palace') }}
                     </a>
                 </div>
 
@@ -80,7 +80,6 @@
                 </div>
             </div>
         </nav>
-
         @yield('content')
     </div>
 
