@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\client;
+use App\chambre;
+use App\type_chambre;
 
-class clientscontroller extends Controller
+class chambrecontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class clientscontroller extends Controller
      */
     public function index()
     {
-       dd('client list');
+        //
     }
 
     /**
@@ -24,8 +25,10 @@ class clientscontroller extends Controller
      */
     public function create()
     {
-        $clients = client::all();
-      return view('clients.index',compact('clients'));
+         $chambres = chambre::all();
+        $type_chambres = type_chambre::all();
+
+        return view('chambres.index',compact('type_chambres','chambres'));
     }
 
     /**
@@ -36,23 +39,15 @@ class clientscontroller extends Controller
      */
     public function store(Request $request)
     {
-        client::create([
-            'nom_clt' => $request->nom_clt,
-            'date_nais_clt' => $request->date_nais_clt,
-            'lieux' => $request->lieux,
-            'nationalite' => $request->nationalite,
-            'sexe' => $request->sexe,
-            'pays_resi' => $request->pays_resi,
-            'telephone' => $request->telephone,
-            'profession' => $request->profession,
-            'from' => $request->from,
-            'to' => $request->to,
-            'cni' => $request->cni,
-            'deliver' => $request->deliver,
-            'transport' => $request->transport,
+        chambre::create([
+            'tel_ch' => $request->tel_ch,
+            'description' => $request->description,
+            'id_type_ch' => $request->id_type_ch,
         ]);
-        $clients = client::all();
-      return view('clients.index',compact('clients'));
+
+        $chambres = chambre::all();
+        $type_chambres = type_chambre::all();
+        return view('chambres.index',compact('type_chambres','chambres'));
     }
 
     /**
@@ -63,7 +58,7 @@ class clientscontroller extends Controller
      */
     public function show($id)
     {
-         dd('show one client ');
+        //
     }
 
     /**
@@ -74,7 +69,7 @@ class clientscontroller extends Controller
      */
     public function edit($id)
     {
-         dd('show view edit a client');
+        //
     }
 
     /**
@@ -86,7 +81,7 @@ class clientscontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-         dd('update client info');
+        //
     }
 
     /**
@@ -97,6 +92,6 @@ class clientscontroller extends Controller
      */
     public function destroy($id)
     {
-         dd('delet client');
+        //
     }
 }

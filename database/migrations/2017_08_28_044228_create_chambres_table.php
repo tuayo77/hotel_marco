@@ -15,8 +15,9 @@ class CreateChambresTable extends Migration
     {
         Schema::create('chambres', function (Blueprint $table) {
             $table->increments('id_ch');
-            $table->integer('tel_ch');
+            $table->string('tel_ch');
             $table->string('description');
+            $table->integer('id_type_ch');
             $table->timestamps();
         });
     }

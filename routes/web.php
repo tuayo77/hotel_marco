@@ -19,3 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/clients','clientscontroller');
+Route::resource('/type_chambres','type_chambrecontroller');
+Route::resource('/chambres','chambrecontroller');
+Route::resource('/reservations','reservationscontroller');
