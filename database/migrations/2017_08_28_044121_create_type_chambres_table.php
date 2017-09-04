@@ -14,7 +14,7 @@ class CreateTypeChambresTable extends Migration
     public function up()
     {
         Schema::create('type_chambres', function (Blueprint $table) {
-            $table->increments('id_type_ch');
+            $table->increments('id');
             $table->string('description');
             $table->integer('prix');
             $table->timestamps();

@@ -3,16 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\chambre;
 use App\type_chambre;
+use App\chambre;
+use App\client;
 use \DB;
-class chambrecontroller extends Controller
+use Carbon\Carbon;
+use App\reservation;
+use PDF;
+
+class facturecontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function fac_reserv($id)
+    {
+
+         $reservations = DB::table('reservations')
+            ->join('chambres', 'reservations.id_ch', '=', 'chambres.id')
+            ->join('clients', 'reservations.id_clt', '=', 'clients.id')
+            ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
+            ->select('reservations.*','chambres.*', 'type_chambres.*','clients.*')
+            ->where('reservations.id','=',$id)
+            ->get();
+        return view('reservations.facture');
+    }
     public function index()
     {
         //
@@ -25,12 +38,7 @@ class chambrecontroller extends Controller
      */
     public function create()
     {
-        $type_chambres = type_chambre::all();
-        $chambres = DB::table('type_chambres')
-            ->join('chambres', 'type_chambres.id', '=', 'chambres.id_type_ch')
-            ->select('chambres.*', 'type_chambres.*')
-            ->get();
-        return view('chambres.index',compact('type_chambres','chambres'));
+        //
     }
 
     /**
@@ -41,16 +49,7 @@ class chambrecontroller extends Controller
      */
     public function store(Request $request)
     {
-        chambre::create([
-            'tel_ch' => $request->tel_ch,
-            'description' => $request->description,
-            'id_type_ch' => $request->id_type_ch,
-            'statut' => 0,
-        ]);
-
-        $chambres = chambre::all();
-        $type_chambres = type_chambre::all();
-        return view('chambres.index',compact('type_chambres','chambres'));
+        //
     }
 
     /**
@@ -61,7 +60,18 @@ class chambrecontroller extends Controller
      */
     public function show($id)
     {
-        //
+
+          $reservations = DB::table('reservations')
+            ->join('chambres', 'reservations.id_ch', '=', 'chambres.id')
+            ->join('clients', 'reservations.id_clt', '=', 'clients.id')
+            ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
+            ->select('reservations.*','chambres.*', 'type_chambres.*','clients.*')
+            ->where('reservations.id','=',$id)
+            ->get();
+            $pdf = PDF::loadView('reservations.facture',compact('reservations'));
+
+            return $pdf->download('facture.pdf');
+        // return view('reservations.facture',compact('reservations'));
     }
 
     /**
@@ -95,7 +105,6 @@ class chambrecontroller extends Controller
      */
     public function destroy($id)
     {
-        chambre::destroy($id);
-       return redirect()->route('chambres.create');
+        //
     }
 }

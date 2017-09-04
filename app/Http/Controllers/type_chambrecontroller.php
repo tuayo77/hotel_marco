@@ -87,6 +87,7 @@ class type_chambrecontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+       type_chambre::destroy($id);
+       return redirect()->route('type_chambres.create');
     }
 }

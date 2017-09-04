@@ -15,7 +15,7 @@
         <li class="list-group-item">
             <a href="{{ route('reservations.create') }}" class="menu-nearby">
                 <i class="fa fa-bed"></i>
-              faire une reservation 
+              Reservation 
             </a>
         </li>
        
@@ -38,9 +38,9 @@
             </a>
         </li>
          <li class="list-group-item">
-            <a href="{{ url('/') }}" class="menu-home">
+            <a href="{{ route('pdf.index') }}" class="menu-home">
                 <i class="fa fa-address-card-o"></i>
-               sortir une facture
+               imprimer
             </a>
         </li>
     </ul>

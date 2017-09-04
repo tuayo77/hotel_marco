@@ -14,7 +14,7 @@ class CreateFacturesTable extends Migration
     public function up()
     {
         Schema::create('factures', function (Blueprint $table) {
-            $table->increments('id_fac');
+            $table->increments('id');
             $table->integer('id_reser');
             $table->timestamps();
         });

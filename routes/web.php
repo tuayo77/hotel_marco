@@ -22,3 +22,5 @@ Route::resource('/clients','clientscontroller');
 Route::resource('/type_chambres','type_chambrecontroller');
 Route::resource('/chambres','chambrecontroller');
 Route::resource('/reservations','reservationscontroller');
+Route::resource('/facture','facturecontroller');
+Route::resource('/pdf','pdfcontroller');

@@ -14,7 +14,7 @@ class CreateConsommationsTable extends Migration
     public function up()
     {
         Schema::create('consommations', function (Blueprint $table) {
-            $table->increments('id_conso');
+            $table->increments('id');
             $table->string('nom_conso');
             $table->integer('prix_conso');
             $table->integer('id_clt');

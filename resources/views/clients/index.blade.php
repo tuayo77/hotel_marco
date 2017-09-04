@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
  <div class="row">
             <div class="col-md-3">
                 @include('layouts.menu')
@@ -16,6 +17,12 @@
                             <p> sexe: {{ $client->sexe }} </p>
                             <p> CNI {{ $client->cni }}</p>
                             <p> nationaliter {{ $client->nationalite }}</p>
+                            <form method="POST" action="{{route('clients.destroy', $client->id_clt)}}">
+                               {{ csrf_field()}}
+                               {{ method_field('DELETE') }}
+                               <button type="submit">X</button>
+                           </form>
+                               
                             <hr>
                         @empty
                         vide 

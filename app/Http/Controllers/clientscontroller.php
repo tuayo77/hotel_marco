@@ -97,6 +97,7 @@ class clientscontroller extends Controller
      */
     public function destroy($id)
     {
-         dd('delet client');
+        client::destroy($id);
+       return redirect()->route('type_chambres.create');
     }
 }

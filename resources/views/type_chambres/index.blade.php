@@ -15,6 +15,14 @@
             			<h3> Description: {{ $type_chambre->description }}</h3>
             				<p> Prix:  {{ $type_chambre->prix }} FCFA</p>
             				<p> code: marco000{{ $type_chambre->id_type_ch }}0</p>
+                             <p>
+                           <form method="POST" action="{{route('type_chambres.destroy', $type_chambre->id_type_ch)}}">
+                               {{ csrf_field()}}
+                               {{ method_field('DELETE') }}
+                               <button type="submit">X</button>
+                           </form>
+                               
+                           </p>
             				<hr>
             			@empty
             			vide 

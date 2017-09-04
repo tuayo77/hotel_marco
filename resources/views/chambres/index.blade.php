@@ -14,8 +14,22 @@
             		@forelse($chambres as $chambre)
             			<h4> Description: {{ $chambre->description }}</h4>
             				<p> Prix:  {{ $chambre->prix }} FCFA</p>
-            				<p> code: marco000{{ $chambre->id_ch }}0</p>
-            				<p> telephone {{ $chambre->tel_ch }}</p>
+            				<p> code: marco000{{ $chambre->id }}0</p>
+                            <p> telephone {{ $chambre->tel_ch }}</p>
+            				<p> statut: @if(($chambre->statut ==0))
+                            libre
+                            @else
+                              occupé
+                              @endif
+                            </p>
+                           <p>
+                           <form method="POST" action="{{route('chambres.destroy', $chambre->id)}}">
+                               {{ csrf_field()}}
+                               {{ method_field('DELETE') }}
+                               <button type="submit">X</button>
+                           </form>
+                               
+                           </p>
             				<hr>
             			@empty
             			vide 
@@ -44,7 +58,7 @@
 
                     <select id="id_type_ch" class="form-control" name="id_type_ch" required autofocus>
                     @forelse($type_chambres as $type_chambre)
-                    	<option value="{{ $type_chambre->id_type_ch }}">{{ $type_chambre->description }} - {{ $type_chambre->prix }} </option>
+                    	<option value="{{ $type_chambre->id }}">{{ $type_chambre->description }} - {{ $type_chambre->prix }} </option>
                     @empty
                     vous devez ajouter des categories de chambres
                     @endforelse
