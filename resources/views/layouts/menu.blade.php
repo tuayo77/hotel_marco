@@ -1,7 +1,7 @@
 <div class="menu">
     <ul class="list-group">
         <li class="list-group-item">
-            <a href="{{ url('/') }}" class="menu-home">
+            <a href="{{ url('/home') }}" class="menu-home">
                 <i class="fa fa-home"></i>
               Home
             </a>
@@ -13,13 +13,25 @@
             </a>
         </li>
         <li class="list-group-item">
-            <a href="{{ route('reservations.create') }}" class="menu-nearby">
+            <a href="{{ route('occupations.create') }}" class="menu-nearby">
                 <i class="fa fa-bed"></i>
-              Reservation 
+             Occupation
             </a>
         </li>
        
         <li class="list-group-item">
+            <a href="{{ route('menus.create') }}" class="menu-dm">
+                <i class="fa fa-restaurent"></i>
+             Menu 
+            </a>
+        </li>
+          <li class="list-group-item">
+            <a href="{{ route('boissons.create') }}" class="menu-dm">
+                <i class="fa fa-wine"></i>
+             Boisson 
+            </a>
+        </li>
+         <li class="list-group-item">
             <a href="{{ url('/') }}" class="menu-dm">
                 <i class="fa fa-commenting"></i>
               enregistrer une vente 
@@ -41,6 +53,12 @@
             <a href="{{ route('pdf.index') }}" class="menu-home">
                 <i class="fa fa-address-card-o"></i>
                imprimer
+            </a>
+        </li>
+         <li class="list-group-item">
+            <a href="{{ route('home') }}" class="menu-home">
+                <i class="fa fa-address-card-o"></i>
+               Saisir une facture
             </a>
         </li>
     </ul>

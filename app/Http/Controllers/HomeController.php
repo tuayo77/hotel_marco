@@ -8,7 +8,7 @@ use App\chambre;
 use App\client;
 use \DB;
 use Carbon\Carbon;
-use App\reservation;
+use App\occupation;
 
 class HomeController extends Controller
 {
@@ -31,13 +31,13 @@ class HomeController extends Controller
     {
         //verification de l'etat des chambre pour liberation si necessaire
 
-        $reservations = reservation::all();
+        $occupations = occupation::all();
 
-        foreach ($reservations as $reservation) {
+        foreach ($occupations as $occupation) {
 
-            if ($reservation->date_fin <= date("Y-m-d H:i:s")) {
+            if ($occupation->date_fin <= date("Y-m-d H:i:s")) {
                DB::table('chambres')
-                ->where('id', $reservation->id_ch)
+                ->where('id', $occupation->id_ch)
                 ->update(['statut' => 0]);
             }
         }

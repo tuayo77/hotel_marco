@@ -8,9 +8,9 @@ use App\chambre;
 use App\client;
 use \DB;
 use Carbon\Carbon;
-use App\reservation;
+use App\occupation;
 
-class reservationscontroller extends Controller
+class occupationscontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,6 @@ class reservationscontroller extends Controller
      */
     public function create()
     {
-       
         $type_chambres = type_chambre::all();
         $clients = client::all();
         $chambres = DB::table('type_chambres')
@@ -37,15 +36,15 @@ class reservationscontroller extends Controller
             ->select('chambres.*', 'type_chambres.*')
             ->where('chambres.statut','=',0)
             ->get();
-        $reservations = DB::table('reservations')
-            ->join('chambres', 'reservations.id_ch', '=', 'chambres.id')
-            ->join('clients', 'reservations.id_clt', '=', 'clients.id')
+        $occupations = DB::table('occupations')
+            ->join('chambres', 'occupations.id_ch', '=', 'chambres.id')
+            ->join('clients', 'occupations.id_clt', '=', 'clients.id')
             ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
-            ->select('reservations.*','chambres.*', 'type_chambres.*','clients.*')
+            ->select('occupations.*','chambres.*', 'type_chambres.*','clients.*')
             //->where('chambres.statut','=',1)
-            ->orderBy('reservations.created_at','desc')
+            ->orderBy('occupations.created_at','Desc')
             ->get();
-        return view('reservations.index',compact('type_chambres','chambres','clients','reservations'));
+        return view('occupations.index',compact('type_chambres','chambres','clients','occupations'));
     }
 
     /**
@@ -59,13 +58,24 @@ class reservationscontroller extends Controller
                //  $oldDate =Carbon::now();
                //  $newDate = date('Y-m-d/H:i:s', strtotime("+ {$request->nbr} days"));
                // $newDate = $oldDate->addDays($request->nbr);
-        
+         $chambres = DB::table('type_chambres')
+            ->join('chambres', 'type_chambres.id', '=', 'chambres.id_type_ch')
+            ->select('chambres.*', 'type_chambres.*')
+            ->where('chambres.id','=',$request->id_ch)
+            ->get();
+            foreach ($chambres as $chambre) {
+              $prix = $chambre->prix;
+            }
+
+        $prix = $prix * $request->nbre;
         $oldDate = Carbon::create();
          $newDate = $oldDate->addDays($request->nbre);
          $newDate->toDateTimeString();
-         reservation::create([
+         occupation::create([
             'mode_payement' => $request->mode_payement,
             'nbre_pers' => $request->nbre_pers,
+            'nbre_jours' => $request->nbre,
+            'prix' => $prix,
             'date_debut' =>Carbon::create()->toDateTimeString(),
             'date_fin' => $newDate->toDateTimeString(),
             'id_clt' => $request->id_clt,
@@ -81,14 +91,14 @@ class reservationscontroller extends Controller
             ->select('chambres.*', 'type_chambres.*')
             ->where('chambres.statut','=',0)
             ->get();
-             $reservations = DB::table('reservations')
-            ->join('chambres', 'reservations.id_ch', '=', 'chambres.id')
-            ->join('clients', 'reservations.id_clt', '=', 'clients.id')
+             $occupations = DB::table('occupations')
+            ->join('chambres', 'occupations.id_ch', '=', 'chambres.id')
+            ->join('clients', 'occupations.id_clt', '=', 'clients.id')
             ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
-            ->select('reservations.*','chambres.*', 'type_chambres.*','clients.*')
+            ->select('occupations.*','chambres.*', 'type_chambres.*','clients.*')
             //->where('chambres.statut','=',1)
             ->get();
-return view('reservations.index',compact('type_chambres','chambres','clients','reservations'));
+return view('occupations.index',compact('type_chambres','chambres','clients','occupations'));
        
         
     }
@@ -101,7 +111,14 @@ return view('reservations.index',compact('type_chambres','chambres','clients','r
      */
     public function show($id)
     {
-        //
+         $occupations = DB::table('occupations')
+            ->join('chambres', 'occupations.id_ch', '=', 'chambres.id')
+            ->join('clients', 'occupations.id_clt', '=', 'clients.id')
+            ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
+            ->select('occupations.*','chambres.*', 'type_chambres.*','clients.*')
+            ->where('occupations.id','=',$id)
+            ->get();
+        return view('occupations.edit_facture',compact('occupations'));
     }
 
     /**

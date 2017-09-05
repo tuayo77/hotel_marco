@@ -45,6 +45,7 @@
                Nom et Prenom: {{ $reservation->nom_clt }} <br>
                Adresse : {{ $reservation->telephone }} <br>
                Chambre ou suite N<sup>0</sup> :  marco000{{ $reservation->id }}0 <br>
+             nombre de jour{{ $reservation->nbre_jours }}0 <br>
                Prix:  Prix:  {{ $reservation->prix }} FCFA <br>
                 <p> date d'entré:  {{ $reservation->date_debut }}</p>
                 <p> date de liberation:  {{ $reservation->date_fin }}</p>

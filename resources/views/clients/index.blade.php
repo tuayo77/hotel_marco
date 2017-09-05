@@ -65,9 +65,9 @@
 
             <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-envelope"></i> </span>
+                    <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar"></i> </span>
 
-                    <input id="date_nais_clt" type="text" class="form-control" placeholder="date de naissance" name="date_nais_clt" value="{{ old('date_nais_clt') }}" required>
+                    <input id="date_nais_clt" type="text" data-provide="datepicker" class="form-control" placeholder="date de naissance" name="date_nais_clt" value="{{ old('date_nais_clt') }}" required>
 
                 </div>
                 @if ($errors->has('date_nais_clt'))

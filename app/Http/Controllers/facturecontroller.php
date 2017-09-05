@@ -8,7 +8,7 @@ use App\chambre;
 use App\client;
 use \DB;
 use Carbon\Carbon;
-use App\reservation;
+use App\occupation;
 use PDF;
 
 class facturecontroller extends Controller
@@ -17,14 +17,14 @@ class facturecontroller extends Controller
     public function fac_reserv($id)
     {
 
-         $reservations = DB::table('reservations')
-            ->join('chambres', 'reservations.id_ch', '=', 'chambres.id')
-            ->join('clients', 'reservations.id_clt', '=', 'clients.id')
+         $occupations = DB::table('occupations')
+            ->join('chambres', 'occupations.id_ch', '=', 'chambres.id')
+            ->join('clients', 'occupations.id_clt', '=', 'clients.id')
             ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
-            ->select('reservations.*','chambres.*', 'type_chambres.*','clients.*')
-            ->where('reservations.id','=',$id)
+            ->select('occupations.*','chambres.*', 'type_chambres.*','clients.*')
+            ->where('occupations.id','=',$id)
             ->get();
-        return view('reservations.facture');
+        return view('occupations.facture');
     }
     public function index()
     {
@@ -61,17 +61,17 @@ class facturecontroller extends Controller
     public function show($id)
     {
 
-          $reservations = DB::table('reservations')
-            ->join('chambres', 'reservations.id_ch', '=', 'chambres.id')
-            ->join('clients', 'reservations.id_clt', '=', 'clients.id')
+          $occupations = DB::table('occupations')
+            ->join('chambres', 'occupations.id_ch', '=', 'chambres.id')
+            ->join('clients', 'occupations.id_clt', '=', 'clients.id')
             ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
-            ->select('reservations.*','chambres.*', 'type_chambres.*','clients.*')
-            ->where('reservations.id','=',$id)
+            ->select('occupations.*','chambres.*', 'type_chambres.*','clients.*')
+            ->where('occupations.id','=',$id)
             ->get();
-            $pdf = PDF::loadView('reservations.facture',compact('reservations'));
+            $pdf = PDF::loadView('occupations.facture',compact('occupations'));
 
             return $pdf->download('facture.pdf');
-        // return view('reservations.facture',compact('reservations'));
+        // return view('occupations.facture',compact('occupations'));
     }
 
     /**

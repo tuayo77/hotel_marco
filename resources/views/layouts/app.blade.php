@@ -86,6 +86,26 @@
         </div>
 
     <!-- Scripts -->
+<script src="{{ asset('plugins/jquery/jquery-2.1.4.min.js')  }}"></script>
+<script src="{{ asset('plugins/pace-master/pace.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/jquery.serializeJSON/jquery.serializejson.min.js') }}"></script>
+<script src="{{ asset('plugins/fancybox/dist/jquery.fancybox.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+
+<script src="{{ asset('plugins/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js') }}"></script>
+<script src="{{ asset('plugins/select2/dist/js/select2.full.min.js') }}"></script>
+
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script type="text/javascript">
+$(function () {
+$('#datetimepicker10').datetimepicker({
+viewMode: 'years',
+format: 'MM/YYYY'
+});
+});
+</script>
+
 </body>
 </html>

@@ -60,7 +60,8 @@
                     @forelse($type_chambres as $type_chambre)
                     	<option value="{{ $type_chambre->id }}">{{ $type_chambre->description }} - {{ $type_chambre->prix }} </option>
                     @empty
-                    vous devez ajouter des categories de chambres
+                    <option value=""> vous devez ajouter des categories de chambres</option>
+                   
                     @endforelse
                     </select>
                     

@@ -3,17 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\type_chambre;
-use App\chambre;
-use App\client;
-use \DB;
-use Carbon\Carbon;
-use App\occupation;
-use PDF;
+use App\boisson;
 
-
-
-class pdfcontroller extends Controller
+class boissoncontroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +14,7 @@ class pdfcontroller extends Controller
      */
     public function index()
     {
-        $clients = client::paginate(10);
-        $occupations = occupation::paginate(10);
-        return view('pdf.index',compact('clients','occupations'));
+        //
     }
 
     /**
@@ -32,9 +22,10 @@ class pdfcontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($var)
+    public function create()
     {
-        dd($var);
+        $boissons = boisson::all();
+        return view('boissons.index',compact('boissons'));
     }
 
     /**
@@ -45,7 +36,13 @@ class pdfcontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+         boisson::create([
+            'nom_boisson' => $request->nom_boisson,
+            'prix_boisson' => $request->prix_boisson,
+            ]);
+        
+        return redirect()->route('boissons.create');
+
     }
 
     /**
@@ -56,26 +53,7 @@ class pdfcontroller extends Controller
      */
     public function show($id)
     {
-
-        if ($id =='clients' ) {
-             $clients = client::all();
-              $pdf = PDF::loadView('pdf.ls_clients',compact('clients'));
-            return $pdf->download('liste_des_clients.pdf');
-        } else 
-        if($id =='occupations' ){
-           $occupations = DB::table('occupations')
-            ->join('chambres', 'occupations.id_ch', '=', 'chambres.id')
-            ->join('clients', 'occupations.id_clt', '=', 'clients.id')
-            ->join('type_chambres', 'chambres.id_type_ch', '=', 'type_chambres.id')
-            ->select('occupations.*','chambres.*', 'type_chambres.*','clients.*')
-            ->get();
-            $pdf = PDF::loadView('pdf.ls_occupations',compact('occupations'));
-            return $pdf->download('liste_des_occupation.pdf');
-        }
-        
-       
-       
-        
+        //
     }
 
     /**
@@ -109,6 +87,7 @@ class pdfcontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        boisson::destroy($id);
+       return redirect()->route('boissons.create');
     }
 }

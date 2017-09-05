@@ -7,19 +7,21 @@
       </div>
  <div class="col-md-3 panel panel-warning">
             <div class="panel-heading">
-                liste des dernieres reservations 
+                liste des dernieres occupations 
             </div>
             <div class="panel-body">
-               @forelse($reservations as $reservation)
-                    <h4> Description: {{ $reservation->description }}</h4>
-                            <p> Prix:  {{ $reservation->prix }} FCFA</p>
-                            <p> code: marco000{{ $reservation->id }}0</p>
-                            <p> telephone {{ $reservation->tel_ch }}</p>
-                            <p> nom du client: {{ $reservation->nom_clt }}</p>
-                            <p> telephne:  {{ $reservation->telephone }}</p>
-                            <p> date d'entré:  {{ $reservation->date_debut }}</p>
-                            <p> date de liberation:  {{ $reservation->date_fin }}</p>
-                            <p> <a href=" {{action('facturecontroller@show',$reservation->id)}} " class="btn btn-primary"> télécharger la facture</a> </p>
+               @forelse($occupations as $occupation)
+                    <h4> Description: {{ $occupation->description }}</h4>
+                            <p> Prix:  {{ $occupation->prix }} FCFA</p>
+                            <p> nombre de jour(s):  {{ $occupation->nbre_jours }} jour(s)</p>
+                            <p> code: marco000{{ $occupation->id }}0</p>
+                            <p> telephone {{ $occupation->tel_ch }}</p>
+                            <p> nom du client: {{ $occupation->nom_clt }}</p>
+                            <p> telephne:  {{ $occupation->telephone }}</p>
+                            <p> date d'entré:  {{ $occupation->date_debut }}</p>
+                            <p> date de liberation:  {{ $occupation->date_fin }}</p>
+                            <p> <a href=" {{route('occupations.show',$occupation->id)}} " class="btn btn-primary"> Modifier la facure</a> </p>
+                            <p> <a href=" {{action('facturecontroller@show',$occupation->id)}} " class="btn btn-primary"> télécharger la facture</a> </p>
                @empty
 
                @endforelse
@@ -51,12 +53,12 @@
 		    </div> 
 
 <div class="col-md-3 panel panel-default">
-             <div class="panel-heading">Enregistrer une reservation 
+             <div class="panel-heading">Enregistrer une occupation 
              </div>
 
                 <div class="panel-body">
 
-                <form class="register" role="form" method="POST" action="{{ route('reservations.store') }}">
+                <form class="register" role="form" method="POST" action="{{ route('occupations.store') }}">
     {{ csrf_field() }}
  <div class="row">
     <div class="col-md-12">
@@ -94,7 +96,7 @@
 
                     <select id="id_ch" class="form-control" name="id_ch" required autofocus>
                     @forelse($chambres as $chambre)
-                    	
+                    	<option value="{{$chambre->id}}"> {{$chambre->description}} - {{$chambre->prix}} </option>
                     @empty
                     <option value=""> il ya pas de chambre libre </option>
                    

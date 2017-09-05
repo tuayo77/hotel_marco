@@ -26,41 +26,46 @@
             </div>
             </div>
              <div class="col-md-3 panel panel-info">
-             <div class="panel-heading">liste des reservation classée par ordre croissant
+             <div class="panel-heading">liste des occupation classée par ordre croissant
              </div>
 
                 <div class="panel-body">
-                  @forelse($reservations as $reservation)
-                    <h4> Description: {{ $reservation->description }}</h4>
-                            <p> Prix:  {{ $reservation->prix }} FCFA</p>
-                            <p> code: marco000{{ $reservation->id }}0</p>
-                            <p> telephone {{ $reservation->tel_ch }}</p>
-                            <p> nom du client: {{ $reservation->nom_clt }}</p>
-                            <p> telephne:  {{ $reservation->telephone }}</p>
-                            <p> date d'entré:  {{ $reservation->date_debut }}</p>
-                            <p> date de liberation:  {{ $reservation->date_fin }}</p>
+                  @forelse($occupations as $occupation)
+                    <h4> Description: {{ $occupation->description }}</h4>
+                            <p> Prix:  {{ $occupation->prix }} FCFA</p>
+                             <p> nombre de jour(s):  {{ $occupation->nbre_jours }} jour(s)</p>
+                            <p> code: marco000{{ $occupation->id }}0</p>
+                            <p> telephone {{ $occupation->tel_ch }}</p>
+                            <p> nom du client: {{ $occupation->nom_clt }}</p>
+                            <p> telephne:  {{ $occupation->telephone }}</p>
+                            <p> date d'entré:  {{ $occupation->date_debut }}</p>
+                            <p> date de liberation:  {{ $occupation->date_fin }}</p>
                          <hr>  
                @empty
 
                @endforelse
             </div>
              <div class="panel-footer">
-               <p>  {{$reservations->links()}} </p>
-            	<a href=" {{route('pdf.show','reservations')}} " class="btn btn-block btn-primary">imprimer</a>
+               <p>  {{$occupations->links()}} </p>
+            	<a href=" {{route('pdf.show','occupations')}} " class="btn btn-block btn-primary">imprimer</a>
             </div>
             </div>
-            {{--  <div class="col-md-3 panel panel-success">
-             <div class="panel-heading">nombre de chambre libre</div>
+             <div class="col-md-3 panel panel-success">
+             <div class="panel-heading">date</div>
 
                 <div class="panel-body">
                     <h1 class="text-center">
-                  
-                   </h1>
+   <div class='input-group date'>
+<input type='text' class="form-control" value="0" data-provide="datepicker" />
+<span class="input-group-addon">
+<span class="glyphicon glyphicon-calendar"></span>
+</span></div>
+           </h1>
             </div>
              <div class="panel-footer">
             	<a href="">imprimer</a>
             </div>
-            </div> --}}
+            </div>
 
 </div>
 

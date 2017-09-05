@@ -35,6 +35,7 @@
  <div class="col-md-3 panel panel-warning">
            @forelse($reservations as $reservation)
                     <h4> Description: {{ $reservation->description }}</h4>
+                            <p> nombre de jour(s):  {{ $reservation->nbre_jours }} FCFA</p>
                             <p> Prix:  {{ $reservation->prix }} FCFA</p>
                             <p> code: marco000{{ $reservation->id }}0</p>
                             <p> telephone {{ $reservation->tel_ch }}</p>
